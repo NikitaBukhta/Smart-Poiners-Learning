@@ -47,18 +47,18 @@ void test_3(void){
     };
 
     std::vector<std::shared_ptr<int>> v2;
-    std::remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (std::shared_ptr<int> s){
+    std::remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (const std::shared_ptr<int> &s){
         return *s == 2;
     });
 
     std::cout << "v1 addresses: " << std::endl;
     for (const auto& s : v){
-        std::cout << *s << std::endl;
+        std::cout << s << std::endl;
     }
 
     std::cout << "v2 addresses: " << std::endl;
     for (const auto& s : v2){
-        std::cout << *s << std::endl;
+        std::cout << s << std::endl;
     }
 
     std::cout << std::endl;

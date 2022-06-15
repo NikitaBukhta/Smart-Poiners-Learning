@@ -53,12 +53,13 @@ TEST(SharedPointerTest, TestForCopingVectors){
     std::vector<std::shared_ptr<int>> v2;
 
     // copy all elems that are not 2;
-    std::remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (std::shared_ptr<int> s){
+    std::remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (std::shared_ptr<int> &s){
         return *s == 2;
     });
 
     size_t v2_size = v2.size();
     for(size_t i = 0, j = 0; i < v2_size; ++i, ++j){
+        // looking for the next the same elem after coping;
         while (v2[i] != v[j]){
             ++j;
         }
