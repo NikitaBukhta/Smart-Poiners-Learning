@@ -47,3 +47,7 @@ target_link_libraries(
     ${EXE}
     ${ALL_LIBS}
 )
+
+#------------------------------------- LINK TESTING -------------------------------------#
+
+add_subdirectory(unit_testing)
