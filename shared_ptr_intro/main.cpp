@@ -1,6 +1,7 @@
 #include "test_class.h"
 
 #include <iostream>
+#include <vector>
 
 // check count of pointers to the memory space;
 void test_1(void){
@@ -35,9 +36,36 @@ void test_2(void){
     std::cout << std::endl;
 }
 
+// check addresses after copiing in vector;
+void test_3(void){
+    std::cout << "test 3:" << std::endl;
+
+    std::vector<std::shared_ptr<int>> v {
+        std::make_shared<int>(1),
+        std::make_shared<int>(2),
+        std::make_shared<int>(3)
+    };
+
+    std::vector<std::shared_ptr<int>> v2;
+    std::remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (std::shared_ptr<int> s){
+        return *s == 2;
+    });
+
+    std::cout << "v1 addresses: " << std::endl;
+    for (const auto& s : v){
+        std::cout << *s << std::endl;
+    }
+
+    std::cout << "v2 addresses: " << std::endl;
+    for (const auto& s : v2){
+        std::cout << *s << std::endl;
+    }
+
+    std::cout << std::endl;
+}
+
 int main(int argc, char **argv){
-    //std::cout << sizeof(std::shared_ptr<test::TestClass>) << std::endl;
-    test_2();
+    test_3();
 
     return 0;
 }
