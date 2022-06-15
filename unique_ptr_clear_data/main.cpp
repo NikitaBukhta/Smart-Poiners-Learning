@@ -30,9 +30,28 @@ void test_2(void){
     std::cout << std::endl;
 }
 
+void test_3(void){
+    std::cout << "test 3" << std::endl;
+    std::unique_ptr<test::TestClass> a_ptr;
+
+    std::cout << "Make first object" << std::endl;
+    a_ptr = std::make_unique<test::TestClass>();
+    auto temp_ptr = a_ptr.get();    // make in order to check memory;
+
+    std::cout << "Make second object" << std::endl;
+    a_ptr = std::make_unique<test::TestClass>();    /* Firstly, new object created;
+                                                     * Then, destructor called to clear the old data;
+                                                     * After all, pointer iindicate to new memory space;
+                                                     */
+    std::cout << "Made second object" << std::endl;
+
+    std::cout << std::endl;
+}
+
 int main(int argc, char **argv){
     //test_1();
     test_2();
+    test_3();
 
     return 0;
 }
