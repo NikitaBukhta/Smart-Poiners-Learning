@@ -37,6 +37,31 @@ TEST(TestUniquePointer, RemoveDataFromSmartPointer){
     ASSERT_EXIT(a.get()->get_var(), testing::KilledBySignal(SIGSEGV), ".*");
 }
 
+void comparing_unique(void){
+    auto a_ptr = std::make_unique<test::TestClass>();
+    std::unique_ptr<test::TestClass> b_ptr(a_ptr.get());
+
+    std::cout << "Compare two unique ptr (a_ptr == b_ptr): " 
+              << std::boolalpha << (a_ptr == b_ptr) << std::endl;
+
+    std::cout << "Compare two unique ptr (a_ptr.get() == b_ptr.get()): " 
+              << std::boolalpha << (a_ptr.get() == b_ptr.get()) << std::endl;
+
+    auto ptr_to_object = b_ptr.get();
+
+    std::cout << "Compare unique and simple ptr (ptr_to_object == b_ptr.get(): "
+              << std::boolalpha << (ptr_to_object == b_ptr.get()) << std::endl;
+
+    /* Comparing simple pointer with unique pointer without using
+     * get() method is impossible;
+     */
+}
+
+TEST(TestUniquePointer, TestForEqualsPtrs){
+    // use ASSERT_EXIT, because comparing_unique must stop the program working;
+    ASSERT_EXIT(comparing_unique(), testing::KilledBySignal(SIGABRT), ".*");
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 
