@@ -69,6 +69,16 @@ TEST(SharedPointerTest, TestForCopingVectors){
     }
 }
 
+TEST(SharedPointerTest, TestCompare){
+    auto a_ptr = std::make_shared<int>(2);
+    auto b_ptr = std::make_shared<int>(5);
+    auto c_ptr = a_ptr;
+    
+    ASSERT_GT(a_ptr, b_ptr);
+    ASSERT_GT(*b_ptr, *a_ptr);
+    ASSERT_EQ(a_ptr, c_ptr);
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 
