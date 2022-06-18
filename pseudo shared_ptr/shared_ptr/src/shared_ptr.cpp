@@ -11,10 +11,7 @@ SharedPtr<T>::SharedPtr(T *ptr){
 
 template<typename T>
 SharedPtr<T>::~SharedPtr(void){
-
-    if (_count != nullptr && --(*_count) == 0){
-        delete[] _ptr;
-    }
+    reset();
 }
 
 template<typename T>
@@ -50,6 +47,16 @@ void SharedPtr<T>::operator= (SharedPtr<T> &&other){
 }
 
 template<typename T>
+bool SharedPtr<T>::operator== (const SharedPtr<T> &other) const{
+    return this->_ptr == other._ptr;
+}
+
+template<typename T>
+bool SharedPtr<T>::operator!= (const SharedPtr<T> &other) const{
+    return this->_ptr != other._ptr;
+}
+
+template<typename T>
 T& SharedPtr<T>::operator* (void){
     return *_ptr;
 }
@@ -71,4 +78,14 @@ ullong SharedPtr<T>::use_count(void){
     }
 
     return *_count;
+}
+
+template<typename T>
+void SharedPtr<T>::reset(void){
+    if (_count != nullptr && --(*_count) == 0){
+        delete[] _ptr;
+    }
+    
+    _count = nullptr;
+    _ptr = nullptr;
 }

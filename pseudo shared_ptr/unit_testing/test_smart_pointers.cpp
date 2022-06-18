@@ -112,6 +112,31 @@ TEST(SharedPtrTest, TestArrowOperator){
     ASSERT_EQ(test_struct->c, 3);
 }
 
+TEST(SharedPtrTest, ResetTest){
+    SharedPtr<int> a_ptr (new int(CHECKED_NUMBER));
+    auto b_ptr(a_ptr);
+
+    ASSERT_EQ(a_ptr.use_count(), 2);
+    ASSERT_EQ(a_ptr.get(), b_ptr.get());
+
+    a_ptr.reset();
+
+    ASSERT_NE(a_ptr.get(), b_ptr.get());
+    ASSERT_EQ(a_ptr.get(), nullptr);
+
+    ASSERT_EQ(a_ptr.use_count(), 0);
+    ASSERT_EQ(b_ptr.use_count(), 1);
+}
+
+TEST(SharedPtrTest, CompareTest){
+    SharedPtr<int> a_ptr (new int(CHECKED_NUMBER));
+    auto b_ptr(a_ptr);
+    SharedPtr<int> c_ptr (new int(CHECKED_NUMBER));
+
+    ASSERT_EQ(a_ptr, b_ptr);
+    //ASSERT_NE(a_ptr, c_ptr);
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 

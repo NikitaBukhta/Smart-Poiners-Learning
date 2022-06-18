@@ -23,6 +23,10 @@ namespace smart_ptr{
 
         void operator= (SharedPtr<T> &&other);
 
+        bool operator== (const SharedPtr<T> &other) const;
+
+        bool operator!= (const SharedPtr<T> &other) const;
+
         T& operator* (void);
 
         T* operator-> (void);
@@ -30,6 +34,8 @@ namespace smart_ptr{
         T* get(void);
 
         ullong use_count(void);
+
+        void reset(void);
     };
 }
 
