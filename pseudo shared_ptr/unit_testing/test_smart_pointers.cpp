@@ -97,6 +97,21 @@ TEST(SharedPtrTest, DereferenceObject){
     ASSERT_EQ(*a, *a.get());
 }
 
+TEST(SharedPtrTest, TestArrowOperator){
+    struct TestStruct{
+        int a;
+        int b;
+        int c;
+    };
+
+    SharedPtr<TestStruct> test_struct (new TestStruct({1, 2, 3}));
+
+    ASSERT_EQ((*test_struct).a, (*test_struct.get()).a);
+    ASSERT_EQ(test_struct->a, 1);
+    ASSERT_EQ(test_struct->b, 2);
+    ASSERT_EQ(test_struct->c, 3);
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 

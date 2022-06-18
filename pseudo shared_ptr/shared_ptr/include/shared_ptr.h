@@ -25,6 +25,8 @@ namespace smart_ptr{
 
         T& operator* (void);
 
+        T* operator-> (void);
+
         T* get(void);
 
         ullong use_count(void);
