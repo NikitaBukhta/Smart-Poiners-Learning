@@ -57,22 +57,22 @@ bool SharedPtr<T>::operator!= (const SharedPtr<T> &other) const{
 }
 
 template<typename T>
-T& SharedPtr<T>::operator* (void){
+T& SharedPtr<T>::operator* (void) const{
     return *_ptr;
 }
 
 template<typename T>
-T* SharedPtr<T>::operator-> (void){
+T* SharedPtr<T>::operator-> (void) const{
     return _ptr;
 }
 
 template<typename T>
-T* SharedPtr<T>::get(void){
+T* SharedPtr<T>::get(void) const{
     return _ptr;
 }
 
 template<typename T>
-ullong SharedPtr<T>::use_count(void){
+ullong SharedPtr<T>::use_count(void) const{
     if (_count == nullptr){
         return 0;
     }

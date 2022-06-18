@@ -27,13 +27,13 @@ namespace smart_ptr{
 
         bool operator!= (const SharedPtr<T> &other) const;
 
-        T& operator* (void);
+        T& operator* (void) const;
 
-        T* operator-> (void);
+        T* operator-> (void) const;
 
-        T* get(void);
+        T* get(void) const;
 
-        ullong use_count(void);
+        ullong use_count(void) const;
 
         void reset(void);
     };
