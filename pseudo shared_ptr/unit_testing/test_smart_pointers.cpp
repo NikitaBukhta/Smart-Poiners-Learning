@@ -84,6 +84,16 @@ TEST(SharedPtrTest, TestMoveOperatorAssignment){
     ASSERT_EQ(a.use_count(), 0);
 }
 
+TEST(SharedPtr, TwoMorePtrs){
+    SharedPtr<int> a (new int(5));
+    SharedPtr<int> b (new int(5));
+
+    ASSERT_EQ(a.use_count(), 1);
+    ASSERT_EQ(b.use_count(), 1);
+    ASSERT_NE(a.get(), b.get());
+    ASSERT_EQ(*a.get(), *b.get());
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 
