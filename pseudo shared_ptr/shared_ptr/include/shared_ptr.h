@@ -23,6 +23,8 @@ namespace smart_ptr{
 
         void operator= (SharedPtr<T> &&other);
 
+        T& operator* (void);
+
         T* get(void);
 
         ullong use_count(void);

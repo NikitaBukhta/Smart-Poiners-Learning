@@ -5,18 +5,18 @@
 
 using namespace smart_ptr;
 
+const int CHECKED_NUMBER = 10;
+
 TEST(SharedPtrTest, TestForRemoveOne){
     int * int_ptr;
-    const int checked_number = 10;
-
     {
-        SharedPtr<int> shared (new int(checked_number));
+        SharedPtr<int> shared (new int(CHECKED_NUMBER));
         int_ptr = shared.get();
 
-        ASSERT_EQ(*int_ptr, checked_number);
+        ASSERT_EQ(*int_ptr, CHECKED_NUMBER);
     }
 
-    ASSERT_NE(*int_ptr, checked_number);
+    ASSERT_NE(*int_ptr, CHECKED_NUMBER);
 }
 
 TEST(SharedPtrTest, TestForRemoveArray){
@@ -35,8 +35,7 @@ TEST(SharedPtrTest, TestForRemoveArray){
 }
 
 TEST(SharedPtrTest, TestForManyPointers){
-    const int checked_number = 10;
-    SharedPtr<int> a (new int(checked_number));
+    SharedPtr<int> a (new int(CHECKED_NUMBER));
     {
         SharedPtr<int> b (a);
 
@@ -49,8 +48,7 @@ TEST(SharedPtrTest, TestForManyPointers){
 }
 
 TEST(SharedPtrTest, TestOperatorAssignment){
-    const int checked_number = 10;
-    SharedPtr<int> a (new int(checked_number));
+    SharedPtr<int> a (new int(CHECKED_NUMBER));
     SharedPtr<int> b;
 
     ASSERT_EQ(b.get(), nullptr);
@@ -61,30 +59,28 @@ TEST(SharedPtrTest, TestOperatorAssignment){
 }
 
 TEST(SharedPtrTest, TestMoveConstructor){
-    const int checked_number = 10;
-    SharedPtr<int> a (new int(checked_number));
+    SharedPtr<int> a (new int(CHECKED_NUMBER));
     SharedPtr<int> b (std::move(a));
 
-    ASSERT_EQ(*b.get(), checked_number);
+    ASSERT_EQ(*b.get(), CHECKED_NUMBER);
     ASSERT_NE(a.get(), b.get());
     ASSERT_EQ(a.get(), nullptr);
     ASSERT_EQ(a.use_count(), 0);
 }
 
 TEST(SharedPtrTest, TestMoveOperatorAssignment){
-    const int checked_number = 10;
-    SharedPtr<int> a (new int(checked_number));
+    SharedPtr<int> a (new int(CHECKED_NUMBER));
     SharedPtr<int> b;
 
     ASSERT_EQ(b.get(), nullptr);
     b = std::move(a);
-    ASSERT_EQ(*b.get(), checked_number);
+    ASSERT_EQ(*b.get(), CHECKED_NUMBER);
     ASSERT_NE(a.get(), b.get());
     ASSERT_EQ(a.get(), nullptr);
     ASSERT_EQ(a.use_count(), 0);
 }
 
-TEST(SharedPtr, TwoMorePtrs){
+TEST(SharedPtrTest, TwoMorePtrs){
     SharedPtr<int> a (new int(5));
     SharedPtr<int> b (new int(5));
 
@@ -92,6 +88,13 @@ TEST(SharedPtr, TwoMorePtrs){
     ASSERT_EQ(b.use_count(), 1);
     ASSERT_NE(a.get(), b.get());
     ASSERT_EQ(*a.get(), *b.get());
+}
+
+TEST(SharedPtrTest, DereferenceObject){
+    SharedPtr<int> a (new int(CHECKED_NUMBER));
+
+    ASSERT_EQ(*a, CHECKED_NUMBER);
+    ASSERT_EQ(*a, *a.get());
 }
 
 int main(int argc, char **argv){

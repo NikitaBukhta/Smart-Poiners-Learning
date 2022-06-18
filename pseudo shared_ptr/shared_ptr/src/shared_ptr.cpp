@@ -50,6 +50,11 @@ void SharedPtr<T>::operator= (SharedPtr<T> &&other){
 }
 
 template<typename T>
+T& SharedPtr<T>::operator* (void){
+    return *_ptr;
+}
+
+template<typename T>
 T* SharedPtr<T>::get(void){
     return _ptr;
 }
