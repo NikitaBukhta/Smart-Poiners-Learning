@@ -1,0 +1,7 @@
+#ifndef UNIQUE_PTR
+#define UNIQUE_PTR
+
+#include "unique_ptr.h"
+#include "src/unique_ptr.cpp"
+
+#endif //!UNIQUE_PTR
