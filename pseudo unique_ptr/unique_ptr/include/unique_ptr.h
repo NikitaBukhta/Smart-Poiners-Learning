@@ -19,6 +19,14 @@ namespace smart_ptr{
 
         void operator= ( UniquePtr<T> &&other);
 
+        bool operator== (const UniquePtr<T> &other) const noexcept;
+
+        bool operator== (const T &other) const noexcept;
+
+        bool operator!= (const UniquePtr<T> &other) const noexcept;
+
+        bool operator!= (const T &other) const noexcept;
+
         T& operator* (void) const noexcept;
 
         T* operator-> (void) const noexcept;

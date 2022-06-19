@@ -44,6 +44,33 @@ TEST(UniquePtrTest, TestForOperatorArrow){
     ASSERT_EQ(unique->a, CHECKED_NUMBER);
 }
 
+/* Description:
+ * This function test operators == and !=;
+ * Will terminate work of the program;
+ */
+bool test_for_equals_and_not(void){
+    const UniquePtr<int> a_uptr (new int(1));
+    UniquePtr<int> b_uptr (a_uptr.get());
+    const UniquePtr<int> c_uptr (new int(1));
+
+    bool ret;
+    ret = a_uptr == b_uptr;
+    ret = a_uptr == b_uptr.get() && ret;
+    ret = a_uptr != c_uptr && ret;
+    ret = a_uptr != c_uptr.get() && ret;
+
+    std::cout << "Test for == and != is " << std::boolalpha 
+              << ret << std::endl;
+
+    return ret;
+}
+
+TEST(UniquePtrTest, TestForEqualsAndNot){
+    // Check if all operators works right and throw program terminates;
+    ASSERT_EXIT(ASSERT_TRUE(test_for_equals_and_not()), 
+        testing::KilledBySignal(SIGABRT), ".*");
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 

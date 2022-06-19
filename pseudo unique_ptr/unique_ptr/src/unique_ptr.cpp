@@ -25,6 +25,26 @@ void UniquePtr<T>::operator= (UniquePtr<T> &&other){
 }
 
 template <typename T>
+bool UniquePtr<T>::operator==(const UniquePtr<T> &other) const noexcept{
+    return this->_ptr == other._ptr;
+}
+
+template <typename T>
+bool UniquePtr<T>::operator==(const T &other) const noexcept{
+    return this->_ptr == &other;
+}
+
+template <typename T>
+bool UniquePtr<T>::operator!=(const UniquePtr<T> &other) const noexcept{
+    return this->_ptr != other._ptr;
+}
+
+template <typename T>
+bool UniquePtr<T>::operator!=(const T &other) const noexcept{
+    return this->_ptr != &other;
+}
+
+template <typename T>
 T& UniquePtr<T>::operator* (void) const noexcept{
     return *_ptr;
 }
