@@ -31,6 +31,19 @@ TEST(UniquePtrTest, TestForMoving){
     ASSERT_EQ(*c, CHECKED_NUMBER);
 }
 
+TEST(UniquePtrTest, TestForOperatorArrow){
+    struct Struct{
+        int a;
+        int b;
+        int c;
+    };
+
+    UniquePtr<Struct> unique(new Struct({1, 2, 3}));
+    ASSERT_EQ(unique->a, 1);
+    unique->a = CHECKED_NUMBER;
+    ASSERT_EQ(unique->a, CHECKED_NUMBER);
+}
+
 int main(int argc, char **argv){
     testing::InitGoogleTest(&argc, argv);
 

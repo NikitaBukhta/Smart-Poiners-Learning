@@ -30,6 +30,11 @@ T& UniquePtr<T>::operator* (void) const noexcept{
 }
 
 template <typename T>
+T* UniquePtr<T>::operator->(void) const noexcept{
+    return _ptr;
+}
+
+template <typename T>
 T* UniquePtr<T>::get(void) const noexcept{
     return _ptr;
 }

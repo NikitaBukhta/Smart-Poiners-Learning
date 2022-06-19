@@ -21,6 +21,8 @@ namespace smart_ptr{
 
         T& operator* (void) const noexcept;
 
+        T* operator-> (void) const noexcept;
+
         T* get(void) const noexcept;
 
         void reset(T *ptr = nullptr) noexcept;
